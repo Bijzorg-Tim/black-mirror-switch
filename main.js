@@ -5,7 +5,7 @@ const server = require('http').Server(app);
 const bodyParser = require('body-parser');
 const Gpio = require('onoff').Gpio
 
-const pins = {}
+// const pins = {}
 
 pins.pin2 = new Gpio(2, 'out')
 pins.pin2.writeSync(0)
@@ -60,6 +60,29 @@ pins.pin26.writeSync(0)
 pins.pin27 = new Gpio(27, 'out')
 pins.pin27.writeSync(0)
 
+// Kas switch gedeelte
+const relais = {
+    kas: {
+        1: 21,
+        2: 20,
+        3: 26,
+        4: 16,
+        5: 19,
+        6: 13,
+        7: 12,
+        8: 6,
+        9: 5,
+        10: 7,
+        11: 8,
+        12: 11,
+        13: 25,
+        14: 9,
+        15: 10,
+        16: 24,
+        17: 23,
+        18: 22
+    }
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -68,15 +91,35 @@ server.listen(mainconfig.client_server_port)
 
 app.post('/action', function (req, res) {
     if (req.body.pin) {
+        const gebouw = req.body.pin.gebouw
+
         if (req.body.action === true) {
-            pins['pin' + req.body.pin].writeSync(1)
+            
+            for (let rel of req.body.pin.relais) {
+                pins['pin' + relais[gebouw][rel.relais]].writeSync(1)
+            }
         }
 
         if (req.body.action === false) {
-            pins['pin' + req.body.pin].writeSync(0)
+            for (let rel of req.body.pin.relais) {
+                pins['pin' + relais[gebouw][rel.relais]].writeSync(0)
+            }
         }
         
     }
+
+    res.send()
+})
+
+app.get('/test', function (req, res) {
+    
+    for (let rel in relais.kas) {
+        pins['pin' + relais.kas[rel]].writeSync(1)
+    }
+
+    setTimeout(function(){
+        pins['pin' + relais.kas[rel]].writeSync(0) 
+     }, 3000);
 
     res.send()
 })
