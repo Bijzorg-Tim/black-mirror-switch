@@ -5,7 +5,7 @@ const server = require('http').Server(app);
 const bodyParser = require('body-parser');
 const Gpio = require('onoff').Gpio
 
-// const pins = {}
+const pins = {}
 
 pins.pin2 = new Gpio(2, 'out')
 pins.pin2.writeSync(0)
@@ -123,5 +123,3 @@ app.get('/test', function (req, res) {
 
     res.send()
 })
-
-
