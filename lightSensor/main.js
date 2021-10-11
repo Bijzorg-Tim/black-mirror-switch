@@ -16,8 +16,8 @@ function getLocalSunrise() {
 }
 
 function checkTurnLightOn (sunset) {
-    const timeNow = parseInt((new Date().getTime() / 1000).toFixed(0))
-    const time9mins = parseInt((new Date().getTime() / 1000).toFixed(0)) + 540000
+    const timeNow = parseInt((new Date().getTime()))
+    const time9mins = parseInt((new Date().getTime())) + 540000
     if (sunset > timeNow && sunset < time9mins) {
         toggleLights('on')
         console.log('turn on')
@@ -25,8 +25,8 @@ function checkTurnLightOn (sunset) {
 }
 
 function checkTurnLightOff (sunrise) {
-    const timeNow = parseInt((new Date().getTime() / 1000).toFixed(0))
-    const time9mins = parseInt((new Date().getTime() / 1000).toFixed(0)) + 540000
+    const timeNow = parseInt((new Date().getTime()))
+    const time9mins = parseInt((new Date().getTime())) + 540000
     if (sunrise > timeNow && sunrise < time9mins) {
         toggleLights('off')
     }

@@ -8,7 +8,7 @@ require('dotenv').config()
 
 module.exports = {
     start: function () {
-        //make sure it's off
+        console.log('starting webserver')
         server.listen(process.env.BLACK_MIRROR_SWITCH_PORT)
 
         app.get('/on', function (req, res) {
@@ -19,7 +19,7 @@ module.exports = {
                 var led = new Gpio(parseInt(pin), 'out');
                 led.writeSync(1)
             });
-            
+
             res.send()
 
         })
