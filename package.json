@@ -1,25 +1,18 @@
 {
   "name": "black-mirror-switch",
   "version": "1.0.0",
-  "description": "meterkast switch",
+  "description": "",
   "main": "main.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "onoff": "^6.0.0"
+    "dotenv": "^10.0.0",
+    "luxon": "^2.0.2",
+    "onoff": "^6.0.3",
+    "sunrise-sunset-js": "^2.2.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bijzorg-Tim/black-mirror-switch.git"
-  },
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Bijzorg-Tim/black-mirror-switch/issues"
-  },
-  "homepage": "https://github.com/Bijzorg-Tim/black-mirror-switch#readme"
+  "license": "ISC"
 }
