@@ -6,21 +6,23 @@ const Gpio = require('onoff').Gpio;
 
 function getLocalSunset () {
     const sunset = sunpackage.getSunset(process.env.COORDINATES_X, process.env.COORDINATES_Y);
-    return parseInt((sunset.getTime() / 1000).toFixed(0))
+    return parseInt(sunset.getTime())
 }
 
 
 function getLocalSunrise() {
     const sunrise = sunpackage.getSunrise(process.env.COORDINATES_X, process.env.COORDINATES_Y);
-    return parseInt((sunrise.getTime() / 1000).toFixed(0))
+    return parseInt(sunrise.getTime())
 }
 
 function checkTurnLightOn (sunset) {
-    const timeNow = parseInt((new Date().getTime()))
+    const timeNow = parseInt((new Date().getTime())) 
     const time9mins = parseInt((new Date().getTime())) + 540000
+    console.log(timeNow)
+    console.log(time9mins)
+    console.log(sunset)
     if (sunset > timeNow && sunset < time9mins) {
         toggleLights('on')
-        console.log('turn on')
     }
 }
 
