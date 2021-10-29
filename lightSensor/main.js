@@ -1,5 +1,4 @@
 require('dotenv').config()
-// import getSunrise from 'sunrise-sunset-js';
 var sunpackage = require("sunrise-sunset-js")
 
 const Gpio = require('onoff').Gpio;
@@ -18,9 +17,6 @@ function getLocalSunrise() {
 function checkTurnLightOn (sunset) {
     const timeNow = parseInt((new Date().getTime())) 
     const time9mins = parseInt((new Date().getTime())) + 540000
-    console.log(timeNow)
-    console.log(time9mins)
-    console.log(sunset)
     if (sunset > timeNow && sunset < time9mins) {
         toggleLights('on')
     }
