@@ -4,9 +4,12 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "laravel-echo": "^1.11.3",
     "onoff": "^6.0.3",
+    "pusher-js": "^7.0.3",
     "sunrise-sunset-js": "^2.2.1"
   },
   "devDependencies": {},
