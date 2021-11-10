@@ -63,17 +63,17 @@ module.exports = {
 };
 
 function startBlackMirrorClient() {
-    //     exec("chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/1", function(error, stdout, stderr) {
-    //     console.log("stdout: " + stdout);
-    //     console.log("stderr: " + stderr);
-    //     if (error !== null) {
-    //         console.log("exec errror: " + error);
-    //     }
-    // });
+        exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/1", function(error, stdout, stderr) {
+        console.log("stdout: " + stdout);
+        console.log("stderr: " + stderr);
+        if (error !== null) {
+            console.log("exec errror: " + error);
+        }
+    });
 }
 
 function getConfigFromBlackMirror() {
-        exec("chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT + "/black-mirror-client/get-device-config", function(error, stdout, stderr) {
+        exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT + "/black-mirror-client/get-device-config", function(error, stdout, stderr) {
         console.log("stdout: " + stdout);
         console.log("stderr: " + stderr);
         if (error !== null) {
