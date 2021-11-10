@@ -1,5 +1,6 @@
 black-mirror/deviceconfig.json
 
+.env
 
 # Logs
 logs
