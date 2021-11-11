@@ -77,14 +77,14 @@ const echo = new Echo({
 
 function toggleEvent(message) {
 
-    if (!process.env.DEVELOPMENT) {
+    if (process.env.DEVELOPMENT === "false") {
         var pin = new Gpio(message.toggle.pin, 'out')
     } else {
         console.log('setting pin')
     }
 
     if (message.action === "on") {
-        if (!process.env.DEVELOPMENT) {
+        if (process.env.DEVELOPMENT === "false") {
             if (pin.readSync() === 0) {
                 pin.writeSync(1)
             }
@@ -94,7 +94,7 @@ function toggleEvent(message) {
     }
 
     if (message.action === "off") {
-        if (!process.env.DEVELOPMENT) {
+        if (process.env.DEVELOPMENT === "false") {
             if (pin.readSync() === 1) {
                 pin.writeSync(0)
             }
@@ -114,7 +114,7 @@ function sendTemperature(config) {
 
 function readTemperature(deviceFunction) {
 
-    if (process.env.DEVELOPMENT) {
+    if (process.env.DEVELOPMENT === "false") {
         sensor.initialize({
             test: {
                 fake: {
