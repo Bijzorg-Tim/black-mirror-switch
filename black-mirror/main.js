@@ -18,10 +18,10 @@ const switchServer = require("./switch.js")
 module.exports = {
     start: function () {
         if (fs.existsSync(__dirname + '/deviceconfig.json')) {
-            if (process.env.HAS_SCREEN) {
-                startBlackMirrorClient()
-            } 
             const config = JSON.parse(fs.readFileSync(__dirname + '/deviceconfig.json','utf8'))
+            if (process.env.HAS_SCREEN) {
+                startBlackMirrorClient(config)
+            } 
             switchServer.start(config)
             
         } else {
@@ -62,9 +62,10 @@ module.exports = {
     },
 };
 
-function startBlackMirrorClient() {
+function startBlackMirrorClient(config) {
+    console.log(config.id)
         if (process.env.DEVELOPMENT === "false") {
-            exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/1", function(error, stdout, stderr) {
+            exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/" + config.id, function(error, stdout, stderr) {
             console.log("stdout: " + stdout);
             console.log("stderr: " + stderr);
                 if (error !== null) {
@@ -72,7 +73,7 @@ function startBlackMirrorClient() {
                 }
             });
         } else {
-            exec("export DISPLAY=:0 && chromium-browser http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/1", function(error, stdout, stderr) {
+            exec("export DISPLAY=:0 && chromium-browser http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/" + config.id , function(error, stdout, stderr) {
             console.log("stdout: " + stdout);
             console.log("stderr: " + stderr);
                 if (error !== null) {
