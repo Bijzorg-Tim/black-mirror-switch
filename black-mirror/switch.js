@@ -124,8 +124,8 @@ function readTemperature(deviceFunction) {
             }
         });
     }
-    
-    deviceFunction.temperature = sensor.read(22, deviceFunction.pin)
+
+    deviceFunction.temperature = Math.ceil(sensor.read(22, deviceFunction.pin)/5)*5;
 
 
     //send temperature
