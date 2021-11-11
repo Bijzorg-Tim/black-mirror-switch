@@ -124,9 +124,9 @@ function readTemperature(deviceFunction) {
         });
     }
 
-    deviceFunction.temperature = Math.round(sensor.read(22, deviceFunction.pin)) / 10;
-
-    console.log(deviceFunction)
+    deviceFunction.temperature = sensor.read(22, deviceFunction.pin)
+    deviceFunction.temperature.temperature = Math.round(deviceFunction.temperature.temperature * 10) / 10;
+    deviceFunction.temperature.humidity = Math.round(deviceFunction.temperature.humidity);
 
     //send temperature
     return axios({
