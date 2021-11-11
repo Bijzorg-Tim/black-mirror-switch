@@ -4,6 +4,11 @@ var blackmirror = require('./black-mirror/main.js')
 var baseServer = require('./baseServer/main.js')
 require('dotenv').config()
 
+const temp = 12.7236712213213
+
+const conso = Math.round(temp * 10) / 10;
+
+console.log(conso)
 
 baseServer.start()
 

@@ -125,8 +125,7 @@ function readTemperature(deviceFunction) {
         });
     }
 
-    deviceFunction.temperature = Math.ceil(sensor.read(22, deviceFunction.pin)/5)*5;
-
+    deviceFunction.temperature = Math.round(sensor.read(22, deviceFunction.pin)) / 10;
 
     //send temperature
     return axios({

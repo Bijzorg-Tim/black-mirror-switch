@@ -19,7 +19,7 @@ module.exports = {
     start: function () {
         if (fs.existsSync(__dirname + '/deviceconfig.json')) {
             const config = JSON.parse(fs.readFileSync(__dirname + '/deviceconfig.json','utf8'))
-            if (process.env.HAS_SCREEN) {
+            if (process.env.HAS_SCREEN === "true") {
                 startBlackMirrorClient(config)
             } 
             switchServer.start(config)
