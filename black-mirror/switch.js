@@ -76,7 +76,7 @@ const echo = new Echo({
 }
 
 function toggleEvent(message) {
-
+    console.log(message)
     if (process.env.DEVELOPMENT === "false") {
         var pin = new Gpio(message.toggle.pin, 'out')
     } else {
@@ -114,7 +114,7 @@ function sendTemperature(config) {
 
 function readTemperature(deviceFunction) {
 
-    if (process.env.DEVELOPMENT === "false") {
+    if (process.env.DEVELOPMENT === "true") {
         sensor.initialize({
             test: {
                 fake: {
