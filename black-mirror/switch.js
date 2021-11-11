@@ -76,7 +76,6 @@ const echo = new Echo({
 }
 
 function toggleEvent(message) {
-    console.log(message)
     if (process.env.DEVELOPMENT === "false") {
         var pin = new Gpio(message.toggle.pin, 'out')
     } else {
