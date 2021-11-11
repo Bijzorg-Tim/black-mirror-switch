@@ -126,6 +126,8 @@ function readTemperature(deviceFunction) {
 
     deviceFunction.temperature = Math.round(sensor.read(22, deviceFunction.pin)) / 10;
 
+    console.log(deviceFunction)
+
     //send temperature
     return axios({
         url: "http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT + "/api/send-temperature/" + deviceFunction.id,
