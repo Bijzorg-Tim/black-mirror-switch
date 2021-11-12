@@ -3,11 +3,6 @@ const server = require('http').Server(app);
 const { exec } = require("child_process");
 var backlight = {}
 
-if (process.env.DEVELOPMENT === "true") {
-} else {
-    backlight = require('rpi-backlight');
-}
-
 require('dotenv').config()
 
 module.exports = {
@@ -141,8 +136,7 @@ function toggleScreenOn () {
     if (process.env.DEVELOPMENT === "true") {
         console.log('turning on screen')
     } else {
-        backlight.powerOn();
-
+        exec("sudo node turnOn.js")
     }
 }
 
@@ -150,7 +144,6 @@ function toggleScreenOff() {
     if (process.env.DEVELOPMENT === "true") {
         console.log('turning off screen')
     } else {
-        backlight.powerOff();
-
+        exec("sudo node turnOff.js")
     }
 }
