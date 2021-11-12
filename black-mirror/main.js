@@ -64,7 +64,7 @@ module.exports = {
 
 function startBlackMirrorClient(config) {
         if (process.env.DEVELOPMENT === "false") {
-            exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BlACK_MIRROR_FRONTEND_PORT +"/black-mirror-client/" + config.id, function(error, stdout, stderr) {
+            exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/" + config.id, function(error, stdout, stderr) {
             console.log("stdout: " + stdout);
             console.log("stderr: " + stderr);
                 if (error !== null) {
@@ -72,7 +72,7 @@ function startBlackMirrorClient(config) {
                 }
             });
         } else {
-            exec("export DISPLAY=:0 && chromium-browser http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BlACK_MIRROR_FRONTEND_PORT +"/black-mirror-client/" + config.id , function(error, stdout, stderr) {
+            exec("export DISPLAY=:0 && chromium-browser http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/" + config.id , function(error, stdout, stderr) {
             console.log("stdout: " + stdout);
             console.log("stderr: " + stderr);
                 if (error !== null) {
@@ -83,7 +83,7 @@ function startBlackMirrorClient(config) {
 }
 
 function getConfigFromBlackMirror() {
-        exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BlACK_MIRROR_FRONTEND_PORT + "/black-mirror-client/get-device-config", function(error, stdout, stderr) {
+        exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT + "/black-mirror-client/get-device-config", function(error, stdout, stderr) {
         console.log("stdout: " + stdout);
         console.log("stderr: " + stderr);
         if (error !== null) {
