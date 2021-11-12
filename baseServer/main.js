@@ -2,7 +2,7 @@ const app = require('express')();
 const server = require('http').Server(app);
 const { exec } = require("child_process");
 
-if (!process.env.DEVELOPTMENT === "true") {
+if (!process.env.DEVELOPMENT === "true") {
     const backlight = require('rpi-backlight');
 }
 
