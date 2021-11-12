@@ -136,7 +136,7 @@ function shutdown () {
 }
 
 function toggleScreenOn () {
-    if (!process.env.DEVELOPTMENT === "true") {
+    if (!process.env.DEVELOPMENT === "true") {
         backlight.powerOn();
     } else {
         console.log('turning on screen')
@@ -144,7 +144,7 @@ function toggleScreenOn () {
 }
 
 function toggleScreenOff() {
-    if (!process.env.DEVELOPTMENT === "true") {
+    if (!process.env.DEVELOPMENT === "true") {
         backlight.powerOff();
     } else {
         console.log('turning off screen')
