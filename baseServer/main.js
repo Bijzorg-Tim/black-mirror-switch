@@ -2,16 +2,49 @@ const app = require('express')();
 const server = require('http').Server(app);
 const { exec } = require("child_process");
 
+if (!process.env.DEVELOPTMENT === "true") {
+    const backlight = require('rpi-backlight');
+}
+
 require('dotenv').config()
 
 module.exports = {
     start: function () {
         console.log('starting webserver')
         server.listen(process.env.BASE_SERVER_PORT)
+        
+        app.use(function (req, res, next) {
+
+            // Website you wish to allow to connect
+            res.setHeader('Access-Control-Allow-Origin', '*');
+        
+            // Request methods you wish to allow
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        
+            // Request headers you wish to allow
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+        
+            // Set to true if you need the website to include cookies in the requests sent
+            // to the API (e.g. in case you use sessions)
+            res.setHeader('Access-Control-Allow-Credentials', true);
+        
+            // Pass to next layer of middleware
+            next();
+        });
 
         app.get('/reboot', function (req, res) {
             reboot()
             res.send('rebooting')
+        })
+
+        app.get('/toggle-screen-on', function (req, res) {
+            toggleScreenOn()
+            res.send()
+        })
+
+        app.get('/toggle-screen-off', function (req, res) {
+            toggleScreenOff()
+            res.send()
         })
 
         app.get('/shutdown', function (req, res) {
@@ -100,4 +133,20 @@ function shutdown () {
         }
         console.log(`stdout: ${stdout}`);
     });
+}
+
+function toggleScreenOn () {
+    if (!process.env.DEVELOPTMENT === "true") {
+        backlight.powerOn();
+    } else {
+        console.log('turning on screen')
+    }
+}
+
+function toggleScreenOff() {
+    if (!process.env.DEVELOPTMENT === "true") {
+        backlight.powerOff();
+    } else {
+        console.log('turning off screen')
+    }
 }

@@ -5,7 +5,7 @@ var app = express();
 app.use(express.json());
 const fs = require("fs")
 const Gpio = require('onoff').Gpio
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 
 require('dotenv').config()
 
@@ -63,7 +63,6 @@ module.exports = {
 };
 
 function startBlackMirrorClient(config) {
-    console.log(config.id)
         if (process.env.DEVELOPMENT === "false") {
             exec("export DISPLAY=:0 && chromium-browser --kiosk http://" + process.env.BLACK_MIRROR_SERVER_URL + ":" + process.env.BLACK_MIRROR_SERVER_PORT +"/black-mirror-client/" + config.id, function(error, stdout, stderr) {
             console.log("stdout: " + stdout);
