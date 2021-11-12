@@ -10,6 +10,7 @@
     "laravel-echo": "^1.11.3",
     "node-dht-sensor": "^0.4.3",
     "onoff": "^6.0.3",
+    "prompt-sync": "^4.2.0",
     "pusher-js": "^7.0.3",
     "rpi-backlight": "^0.3.0",
     "sunrise-sunset-js": "^2.2.1"
