@@ -136,17 +136,19 @@ function shutdown () {
 }
 
 function toggleScreenOn () {
-    if (!process.env.DEVELOPMENT === "true") {
-        backlight.powerOn();
-    } else {
+    if (process.env.DEVELOPMENT === "true") {
         console.log('turning on screen')
+    } else {
+        backlight.powerOn();
+
     }
 }
 
 function toggleScreenOff() {
-    if (!process.env.DEVELOPMENT === "true") {
-        backlight.powerOff();
-    } else {
+    if (process.env.DEVELOPMENT === "true") {
         console.log('turning off screen')
+    } else {
+        backlight.powerOff();
+
     }
 }
