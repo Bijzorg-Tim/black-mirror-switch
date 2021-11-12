@@ -1,9 +1,11 @@
 const app = require('express')();
 const server = require('http').Server(app);
 const { exec } = require("child_process");
+var backlight = {}
 
-if (!process.env.DEVELOPMENT === "true") {
-    const backlight = require('rpi-backlight');
+if (process.env.DEVELOPMENT === "true") {
+} else {
+    backlight = require('rpi-backlight');
 }
 
 require('dotenv').config()
