@@ -136,7 +136,7 @@ function toggleScreenOn () {
     if (process.env.DEVELOPMENT === "true") {
         console.log('turning on screen')
     } else {
-        exec("sudo node turnOn.js", (error, stdout, stderr) => {
+        exec("sudo node baseServer/turnOn.js", (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
@@ -155,7 +155,7 @@ function toggleScreenOff() {
         console.log('turning off screen')
     } else {
         // exec("sudo /home/pi/.nvm/versions/node/v" + process.env.NODE_VERSION + "/bin/node baseServer/turnOff.js")
-        exec("sudo node turnOff.js", (error, stdout, stderr) => {
+        exec("sudo node baseServer/turnOff.js", (error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
                 return;
