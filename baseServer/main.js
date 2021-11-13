@@ -136,7 +136,17 @@ function toggleScreenOn () {
     if (process.env.DEVELOPMENT === "true") {
         console.log('turning on screen')
     } else {
-        exec("sudo /home/pi/.nvm/versions/node/v" + process.env.NODE_VERSION + "/bin/node baseServer/turnOn.js")
+        exec("sudo node turnOn.js", (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+        });
     }
 }
 
@@ -144,6 +154,17 @@ function toggleScreenOff() {
     if (process.env.DEVELOPMENT === "true") {
         console.log('turning off screen')
     } else {
-        exec("sudo /home/pi/.nvm/versions/node/v" + process.env.NODE_VERSION + "/bin/node baseServer/turnOff.js")
+        // exec("sudo /home/pi/.nvm/versions/node/v" + process.env.NODE_VERSION + "/bin/node baseServer/turnOff.js")
+        exec("sudo node turnOff.js", (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+        });
     }
 }
