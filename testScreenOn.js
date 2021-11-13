@@ -1,6 +1,7 @@
 const { exec } = require("child_process");
 
-exec("sudo node baseServer/turnOn.js", (error, stdout, stderr) => {
+
+exec('sudo "$(which node)" baseServer/turnOn.js', (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
