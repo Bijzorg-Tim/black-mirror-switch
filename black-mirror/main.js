@@ -6,6 +6,7 @@ app.use(express.json());
 const fs = require("fs")
 const Gpio = require('onoff').Gpio
 const { exec, spawn } = require('child_process');
+const deviceCommands = require("./deviceCommands.js")
 
 require('dotenv').config()
 
@@ -32,33 +33,6 @@ module.exports = {
             }
             startListeningForConfigs()
         }
-        // console.log('starting webserver')
-        // server.listen(process.env.BLACK_MIRROR_SWITCH_PORT)
-
-        // app.get('/on', function (req, res) {
-            
-        //     const pins = process.env.LIGHT_PINS_ARRAY.split(',')
-
-        //     pins.forEach(pin => {
-        //         var led = new Gpio(parseInt(pin), 'out');
-        //         led.writeSync(1)
-        //     });
-
-        //     res.send()
-
-        // })
-
-        // app.get('/off', function (req, res) {
-        
-        //     const pins = process.env.LIGHT_PINS_ARRAY.split(',')
-
-        //     pins.forEach(pin => {
-        //         var led = new Gpio(parseInt(pin), 'out');
-        //         led.writeSync(0)
-        //     });
-
-        //     res.send()
-        // })
     },
 };
 
@@ -96,27 +70,10 @@ function startListeningForConfigs () {
     app.listen(process.env.CONFIG_LISTEN_SERVER_LOCAL_PORT)
     app.post('/set-setup', function (req, res) {
         fs.writeFileSync(__dirname + '/deviceconfig.json', JSON.stringify(req.body.config))
-        restart()
+        deviceCommands.restart()
         res.send()
     })
 }
-
-function restart () {
-    exec("pm2 restart all", (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });
-}
-
-
-
 
 function getConfigFromBlackMirrorWithoutScreen () {
     const id = this.id = Math.floor(Math.random() * 1000000);

@@ -8,6 +8,8 @@ const Echo = require("laravel-echo")
 global.Pusher = require("pusher-js")
 require('dotenv').config()
 const Gpio = require('onoff').Gpio
+const deviceCommands = require("./deviceCommands.js")
+
 
 module.exports = {
     start: function (config) {
@@ -63,7 +65,25 @@ const echo = new Echo({
   })
   .listen(".sync-state", message => {
     getDevicefunctionsStatus(config)
-  });
+  })
+    .listen(".restart", message => {
+        deviceCommands.restart()
+    })
+    .listen(".reboot", message => {
+        deviceCommands.reboot()
+    })
+    .listen(".shutdown", message => {
+        deviceCommands.shutdown()
+    })
+    .listen(".update", message => {
+        deviceCommands.update()
+    })
+    .listen(".update-config", message => {
+        deviceCommands.updateConfig(config)
+    })
+    .listen(".delete-config", message => {
+        deviceCommands.deleteConfig()
+    })
 
   console.log('listening on devicechannel ' + config.id)
   echo.channel("devicechannel" + config.id).listen(".ping", message => {
@@ -72,16 +92,34 @@ const echo = new Echo({
   .listen(".toggle-changed", message => {
       toggleEvent(message)
   })
+  .listen(".restart", message => {
+    deviceCommands.restart()
+    })
+    .listen(".reboot", message => {
+        deviceCommands.reboot()
+    })
+    .listen(".shutdown", message => {
+        deviceCommands.shutdown()
+    })
+    .listen(".update", message => {
+        deviceCommands.update()
+    })
+    .listen(".update-config", message => {
+        deviceCommands.updateConfig()
+    })
+    .listen(".delete-config", message => {
+        deviceCommands.deleteConfig()
+    })
 
 }
 
 function toggleEvent(message) {
+    console.log(message)
     if (process.env.DEVELOPMENT === "false") {
         var pin = new Gpio(message.toggle.pin, 'out')
     } else {
         console.log('setting pin')
     }
-
     if (message.action === "on") {
         if (process.env.DEVELOPMENT === "false") {
             if (pin.readSync() === 0) {
@@ -143,6 +181,15 @@ function readTemperature(deviceFunction) {
 
 function Synctoggles (deviceFunctions) {
     deviceFunctions.forEach(a => {
-        // console.log(a)
+        if (a.type === 'toggle') {
+            let message = {
+                toggle: {
+                    pin: a.pin,
+                    state: a.state
+                },
+                action: a.state,
+            }
+            toggleEvent(message)
+        }
     });
 }
