@@ -64,7 +64,7 @@ function readCard (key) {
         data: mfrc522.getDataForBlock(8)
     }
 
-    mfrc522.stopCrypto();
+    // mfrc522.stopCrypto();
 
     // console.log(result)
 
