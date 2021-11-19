@@ -12,7 +12,7 @@ module.exports = {
     },
 };
 
-function writeNewCard (key, data) {
+function writeToCard (key, data) {
 
     var writeinterval = setInterval(function() {
 
