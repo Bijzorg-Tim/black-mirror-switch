@@ -61,10 +61,6 @@ function writeToCard (key, data) {
             mfrc522.writeAuthenticationKey(11, newKey);
         }
 
-        const data = [
-            124,12,4,14
-        ]
-
         mfrc522.writeDataToBlock(8, data);
 
         //get data
