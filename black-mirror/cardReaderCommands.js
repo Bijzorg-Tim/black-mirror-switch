@@ -47,11 +47,6 @@ function readCard (key) {
 
     //# Select the scanned card
     const memoryCapacity = mfrc522.selectCard(uid);
-    console.log("Card Memory Capacity: " + memoryCapacity);
-
-    //# oldKey is the default key for authentication
-    const oldKey = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
-    const newKey = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
 
     //# Authenticate on Block 11 with key and uid
     if (!mfrc522.authenticate(11, key, uid)) {
