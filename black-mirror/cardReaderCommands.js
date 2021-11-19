@@ -62,7 +62,7 @@ function writeToCard (key, data) {
         }
 
         const data = [
-            444,444,444,444
+            124,124,124,124
         ]
 
         mfrc522.writeDataToBlock(8, data);
