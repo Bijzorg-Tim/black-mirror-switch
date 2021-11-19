@@ -12,6 +12,61 @@ module.exports = {
     },
 };
 
+function readCard (key) {
+    const softSPI = new SoftSPI({
+        clock: 23, // pin number of SCLK
+        mosi: 19, // pin number of MOSI
+        miso: 21, // pin number of MISO
+        client: 24 // pin number of CS
+    });
+
+    // GPIO 24 can be used for buzzer bin (PIN 18), Reset pin is (PIN 22).
+    // I believe that channing pattern is better for configuring pins which are optional methods to use.
+    const mfrc522 = new Mfrc522(softSPI).setResetPin(22).setBuzzerPin(18);
+
+    //# reset card
+    mfrc522.reset();
+
+    //# reset card
+    mfrc522.reset();
+
+    //# Scan for cards
+    let response = mfrc522.findCard();
+    if (!response.status) {
+        return;
+    }
+
+    response = mfrc522.getUid();
+    if (!response.status) {
+        console.log("Waiting for card");
+        return;
+    }
+
+    //# If we have the UID, continue
+    const uid = response.data;
+
+    //# Select the scanned card
+    const memoryCapacity = mfrc522.selectCard(uid);
+    console.log("Card Memory Capacity: " + memoryCapacity);
+
+    //# oldKey is the default key for authentication
+    const oldKey = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
+    const newKey = [0xff, 0xff, 0xff, 0xff, 0xff, 0xff];
+
+    //# Authenticate on Block 11 with key and uid
+    if (!mfrc522.authenticate(11, key, uid)) {
+        console.log('wrong key')
+        return;
+    }
+
+    //get data
+
+    mfrc522.stopCrypto();
+
+    return mfrc522.getDataForBlock(8);
+
+}
+
 function writeToCard (key, data) {
 
     var writeinterval = setInterval(function() {
@@ -41,7 +96,7 @@ function writeToCard (key, data) {
     //# Get the UID of the card
     response = mfrc522.getUid();
     if (!response.status) {
-        console.log("UID Scan Error");
+        console.log("Waiting for card");
         return;
     } else {
 
