@@ -24,10 +24,10 @@ setInterval(function() {
 
   //# Scan for cards
   let response = mfrc522.findCard();
-  if (!response.status) {
-    console.log("No Card");
-    return;
-  }
+//   if (!response.status) {
+//     console.log("No Card");
+//     return;
+//   }
   console.log("Card detected, CardType: " + response.bitSize);
 
   //# Get the UID of the card
