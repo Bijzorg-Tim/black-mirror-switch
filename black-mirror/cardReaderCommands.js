@@ -66,7 +66,7 @@ function readCard (key) {
 
     mfrc522.stopCrypto();
 
-    console.log(result)
+    // console.log(result)
 
     return result
 
