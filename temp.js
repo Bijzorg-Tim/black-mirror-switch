@@ -5,6 +5,6 @@ const data = [12,4,6,1,2,3,4,8]
 
 // cardreader.writeToCard(key, data)
 
-setInterval(function (key) {
+setInterval(function () {
     console.log(cardreader.read(key))
-}, 500) 
+}.bind(key), 500) 
