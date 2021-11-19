@@ -5,7 +5,7 @@ const SoftSPI = require("rpi-softspi");
 
 module.exports = {
     read: function (key) {
-        readCard(key)
+        return readCard(key)
     },
     writeToCard: function (key, data) {
         writeToCard(key, data)
