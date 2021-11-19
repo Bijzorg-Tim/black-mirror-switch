@@ -59,16 +59,16 @@ function readCard (key) {
         return;
     }
 
-    const response = {
+    const result = {
         uid: uid,
         data: mfrc522.getDataForBlock(8)
     }
 
     mfrc522.stopCrypto();
 
-    console.log(response)
+    console.log(result)
 
-    return response
+    return result
 
 }
 
