@@ -22,11 +22,15 @@ exec("export DISPLAY=:0 && chromium-browser index.html");
 
 //   var pingFunction = ping();
 
+var interval = 300; 
+if (process.env.PING_REPEAT_IN_SECONDS) {
+    interval = process.env.PING_REPEAT_IN_SECONDS
+} 
 
 const toegang = new Monitor({
-    website: 'http://' + process.env.BLACK_MIRROR_SERVER_URL + ":" +  process.env.BLACK_MIRROR_API_PORT,
+    website: 'http://' + process.env.BLACK_MIRROR_SERVER_URL + ":" +  process.env.BLACK_MIRROR_SERVER_PORT,
     title: 'Black mirror server',
-    interval: process.env.PING_REPEAT_IN_SECONDS,
+    interval: interval,
 
     config: {
       intervalUnits: 'seconds' // seconds, milliseconds, minutes {default}, hours
