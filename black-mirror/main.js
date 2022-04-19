@@ -73,6 +73,7 @@ module.exports = {
 //   }
 
 async function startBlackMirrorClient(config) {
+        baseServer.turnon()
         exec("pkill -f chromium-browser")
         await sleep(3000)
 
