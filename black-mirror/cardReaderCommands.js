@@ -3,14 +3,39 @@ const Mfrc522 = require("mfrc522-rpi");
 const SoftSPI = require("rpi-softspi");
 
 
+global.readInterval
+
 module.exports = {
+    start: function (config) {
+        getCards().then(() => {
+            startCardReadLoop(config)
+        })
+
+    },
     read: function (key) {
         return readCard(key)
     },
-    writeToCard: function (key, data) {
-        writeToCard(key, data)
+    writeToCard: function (key, data, config) {
+        writeToCard(key, data, config)
     },
 };
+
+function getCards(config) {
+    console.log('getting cards')
+}
+
+function evaluateCard (card) {
+    console.log(card)
+}
+
+function startCardReadLoop (config) {
+    readInterval = setInterval(function() {
+        let card = readCard(config.cardkey)
+        if (card) {
+            evaluateCard(card)
+        }
+    }.bind(config.cardkey),500)
+}
 
 function readCard (key) {
     const softSPI = new SoftSPI({
@@ -62,7 +87,10 @@ function readCard (key) {
     mfrc522.stopCrypto();
     // console.log(result)
 
-    return result
+    //send card to server
+
+    //restart loop
+    startCardReadLoop(config)
 
 }
 

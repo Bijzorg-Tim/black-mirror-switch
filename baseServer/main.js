@@ -40,6 +40,12 @@ module.exports = {
             res.send()
         })
     },
+    turnon: function () {
+        toggleScreenOn()
+    },
+    turnoff: function () {
+        toggleScreenOff()
+    }
 }
 
 function toggleScreenOn () {
