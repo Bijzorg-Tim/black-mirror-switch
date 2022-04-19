@@ -48,7 +48,7 @@ module.exports = {
         baseServer.turnon()
         exec("pkill -f chromium-browser")
         await sleep(3000)
-        exec("chromium-browser index.html")
+        exec("export DISPLAY=:0 && chromium-browser index.html");
     }
 };
 
