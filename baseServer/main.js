@@ -9,6 +9,10 @@ require('dotenv').config()
 
 module.exports = {
     start: function () {
+        console.log('turning screen on')
+
+        toggleScreenOn()
+
         console.log('starting webserver')
         server.listen(process.env.BASE_SERVER_PORT)
         

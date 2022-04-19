@@ -11,7 +11,6 @@ var isServerRunning = false
 
 
 baseServer.start()
-
 // exec("chromium-browser index.html")
 exec("export DISPLAY=:0 && chromium-browser index.html");
 
